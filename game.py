@@ -1,12 +1,9 @@
 class TicTacToe:
-    def player_name(self):
-        print("Enter the name of player one: ")
-        player_1 = input()
-        print("Enter the name of player two: ")
-        player_2 = input()
-        return player_1, player_2
+    def __init__(self, player_1: str, player_2: str):
+        self.player_1 = player_1
+        self.player_2 = player_2
 
-    def roles(self, player_1: str, player_2: str):
+    def roles(self):
         import random
         players = [player_1, player_2]
         random.shuffle(players)
@@ -48,16 +45,20 @@ class TicTacToe:
             print("The winner is ", players[(count + 1) % 2])
             sys.exit()
 
+    def whose_turn(self, count: int, players: list, symbols: list):
+        print("Player", players[count], "moves with ", symbols[count])
+
     def move(self, players: list, symbols: list, count: int, field: list):
         from tic_tac_toe import validation
         from tic_tac_toe import free_cell
         from tic_tac_toe import field_output
         from tic_tac_toe import vin_check
-        print("Player", players[count], "moves\n")
+        from tic_tac_toe import whose_turn
+        whose_turn(count, players, symbols)
         print("Enter the row number(from 0 to 2)\n")
-        row =
+        row = input()
         print("\nEnter the column number(from 0 to 2)")
-        column =
+        column = input()
         validation(self, row, column)
         free_cell(self, row, column, field)
         field[row][column] = symbols[count]
@@ -66,15 +67,17 @@ class TicTacToe:
         vin_check(self, field, count, players)
         return count
 
-
 if __name__ == '__main__':
-    TicTacToe()
-    player_1, player_2 = player_name()
-    players, symbols = roles(player_1, player_2)
+    print("Enter the name of player one: ")
+    player_1 = input()
+    print("Enter the name of player two: ")
+    player_2 = input()
+    TicTacToe = TicTacToe(player_1, player_2)
+
     field = [["-", "-", "-"],
              ["-", "-", "-"],
              ["-", "-", "-"]]
-    count = 0;
+    count = 0
     field_output(self, field)
     while 1:
         count = move(self, players, symbols, count, field)
